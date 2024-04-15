@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+    <link rel="stylesheet" href="styles.css">  <!-- External stylesheet -->
+
+    <!-- Inline styles -->
+    <style>
+        /* Basic styling for the entire body */
+        body {
+            font-family: 'Arial', sans-serif; /* Setting the font family */
+            display: flex;  /* Using Flexbox for center alignment */
+            justify-content: center;  /* Centering content horizontally */
+            align-items: center;  /* Centering content vertically */
+            height: 100vh;  /* Taking up the full viewport height */
+            background-color: #eaf7ea;  /* Light green background to signify success */
+        }
+
+        /* Styling for the main container that houses the confirmation message */
+        .confirmation-container {
+            background-color: #fff;
+            padding: 40px 50px;
+            border-radius: 10px;  /* Rounded corners */
+            box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);  /* Drop shadow for 3D effect */
+            text-align: center;  /* Centralize content */
+            width: 400px;  /* Fixed width for consistency across devices */
+        }
+
+        /* Styling for the success image icon */
+        .confirmation-container img {
+            width: 100px;  /* Image width */
+            height: 100px;  /* Image height */
+        }
+
+        /* Styling for the header text */
+        h2 {
+            color: #007BFF;  /* Blue text color */
+            margin-top: 20px;
+        }
+
+        /* Styling for the description text */
+        p {
+            font-size: 16px;
+            color: #555;  /* Grayish text color */
+            margin-top: 20px;
+        }
+
+        /* Styling for the "Go Home" button */
+        .go-home {
+            background-color: #007BFF;  /* Blue background color */
+            color: #ffffff;  /* White text color */
+            border: none;  /* No border for a cleaner look */
+            padding: 12px 20px;
+            border-radius: 5px;  /* Rounded corners for the button */
+            cursor: pointer;  /* Cursor style indicating a clickable button */
+            margin-top: 30px;  /* Space above the button */
+            font-size: 16px;
+            transition: background-color 0.3s ease;  /* Smooth color transition on hover */
+        }
+
+        /* Styling for the "Go Home" button when hovered */
+        .go-home:hover {
+            background-color: #0056b3;  /* Darker blue on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main container for the confirmation content -->
+    <div class="confirmation-container">
+        <!-- Success icon image -->
+        <img src="https://www.easy-gst.in/wp-content/uploads/2017/07/success-icon-10.png" alt="Success Icon">  
+        <!-- Header text for confirmation -->
+        <h2>Payment Successful</h2>
+        <!-- Description text for confirmation -->
+        <p>Thank you for your purchase! Your transaction has been completed successfully.</p>
+        <!-- Go Home button that redirects user to homepage when clicked -->
+        <button class="go-home" onclick="goHome()">Go To Dashboard</button>
+    </div>
+
+    <!-- JavaScript to handle the button click and redirect -->
+    <script>
+        function goHome() {
+            window.location.href = 'Userdashbrd.html';  // Redirect to the homepage or any other page.
+        }
+    </script>
+</body>
+
+</html>

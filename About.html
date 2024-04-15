@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Ensuring the page is responsive on different devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Decentralized Trading System</title>
+    <style>
+        /* Resetting default margin, padding, box-sizing for all elements */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;  /* Smooth transition for all properties */
+        }
+
+        /* Base styles for body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Header styling */
+        header {
+            background-color: white;
+            color:black;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        /* Main content styling with max-width for responsiveness */
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        }
+
+        /* Initial hidden state for the div containing additional information */
+        .hidden {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        /* Button styling */
+        #showMoreBtn {
+            padding: 0.6rem 1.2rem;
+            background-color: #519d6f;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+            letter-spacing: 0.05rem;
+        }
+ #home{
+        padding: 0.6rem 1.2rem;
+            background-color: #519d6f;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+            letter-spacing: 0.05rem;
+
+
+}
+
+
+        footer {
+            background-color: white;
+            color: black;
+            text-align: center;
+            padding: 1rem 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>CryptoHarbor</h1>
+        <p>Secure and user-friendly platform for peer-to-peer trading.</p>
+    </header>
+    <main>
+        <h2>About Us</h2>
+        <p>This platform is dedicated to providing a seamless and trustless trading experience for users within the blockchain ecosystem.</p>
+        <!-- Button that will toggle the hidden content -->
+        <button id="showMoreBtn">Show More</button>
+ <button id="home"><a href="Home.html">Go To Home</a></button>
+        <!-- Hidden content div -->
+        <div id="moreInfo" class="hidden">
+            <p style="margin-top: 1rem;">This platform has been developed by a talented team of students aiming to revolutionize the digital asset trading experience. It ensures seamless, trustless, and transparent transactions for all users. By utilizing the power of blockchain technology and smart contracts, our system provides a next-gen trading platform that places user's security and ease of use at the forefront.</p>
+        </div>
+    </main>
+    <!-- Footer with copyright statement -->
+    <footer>
+        <p>&copy; 2023 CryptoHarbor. All Rights Reserved.</p>
+    </footer>
+    <script>
+        const showMoreBtn = document.getElementById('showMoreBtn');
+        const moreInfo = document.getElementById('moreInfo');
+
+        /* Script to toggle hidden content when the button is clicked */
+        showMoreBtn.addEventListener('click', function() {
+            if (moreInfo.style.maxHeight === '' || moreInfo.style.maxHeight === '0px') {
+                moreInfo.style.maxHeight = moreInfo.scrollHeight + 'px';  // Open and show content
+                moreInfo.style.opacity = '1';
+                this.textContent = "Show Less";
+            } else {
+                moreInfo.style.maxHeight = '0';  // Collapse and hide content
+                moreInfo.style.opacity = '0';
+                this.textContent = "Show More";
+            }
+        });
+    </script>
+</body>
+
+</html>

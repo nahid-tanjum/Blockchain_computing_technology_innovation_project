@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "axios": "^1.5.1",
+    "concurrently": "^8.2.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.2",
+    "parse": "^4.2.0",
+    "solc": "^0.8.0",
+    "web3": "^4.1.2"
+  },
+  "name": "group-1-08",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ganache": "npx ganache-cli --networkId $npm_package_config_ganache_networkId --gasPrice $npm_package_config_ganache_gasPrice --gasLimit $npm_package_config_ganache_gasLimit --allowUnlimitedContractSize",
+    "start": "concurrently \"npm run ganache\" \"npm run migrate\"",
+    "migrate": "rm -rf build && truffle migrate --reset --compile-all --network development"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "config": {
+    "parse_server_url": "https://parseapi.back4app.com/",
+    "parse_app_id": "8PMdWKkWFMssQgrXPP0w9sgCVpORBqymIcQG1jhB",
+    "ethereum_provider_url": "ws://127.0.0.1:7545"
+  },
+  "devDependencies": {
+    "@types/web3": "^1.2.2"
+  }
+}

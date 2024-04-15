@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoHarbor</title>
+
+</head>
+<body>
+
+
+    <header>
+        <h1 id="header">CryptoHarbor</h1>
+        <p>Secure and user-friendly platform for peer-to-peer trading.</p>
+    </header> 
+
+
+    <div class="container">
+      
+        <form action="" id="login">
+            <div class="alert">Logged In</div>
+        
+            <div class="inputBox1">
+                <input type="text" id="loginEmail" placeholder="Email" required/>
+            </div>
+            <div class="inputBox">
+                <input type="text" id="loginPassword" placeholder="Password" required/>
+            </div>
+        
+            <div class="logInSubmitButton">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        <p> Don't Have any account yet? <a href="Account.html"> Go To Register Page</a></p>
+        <p> <a href="home.html"> Go To Home Page</a></p>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    
+    <script>
+        // copy your firebase config informations
+        const firebaseConfig = {
+    apiKey: "AIzaSyApLNnZMcxHXrBLNVbO5T_2OQnT6J1Upbw",
+    authDomain: "cryptoharbor-593f2.firebaseapp.com",
+    databaseURL: "https://cryptoharbor-593f2-default-rtdb.firebaseio.com",
+    projectId: "cryptoharbor-593f2",
+    storageBucket: "cryptoharbor-593f2.appspot.com",
+    messagingSenderId: "236261226631",
+    appId: "1:236261226631:web:c65c81956500844e396022",
+    measurementId: "G-449LJKSQ4H"
+  };
+
+        // initialize firebase
+     
+
+        firebase.initializeApp(firebaseConfig);
+
+var loginFormDB = firebase.database().ref("register");
+
+document.getElementById("login").addEventListener("submit", checkLogin);
+
+function checkLogin(e) {
+    e.preventDefault();
+
+    var enteredEmail = getElementVal("loginEmail");
+    var enteredPassword = getElementVal("loginPassword");
+
+    // Query the database to check if the email and password combination exists
+    loginFormDB.orderByChild("Email").equalTo(enteredEmail).once("value", snapshot => {
+        if (snapshot.exists()) {
+            // Email exists, now we check the password
+            var userDetails = snapshot.val();
+            var firstKey = Object.keys(userDetails)[0];
+            if (userDetails[firstKey].UserPass === enteredPassword) {
+                // Correct password, login successful
+                showAlert("Logged In Successfully!", "#2ecc71");
+                // Redirect to user dashboard or any other page you desire
+                window.location.href = "Userdashbrd.html";
+            } else {
+                // Incorrect password
+                showAlert("Incorrect Password!", "#e74c3c");
+            }
+        } else {
+            // Email doesn't exist
+            showAlert("Email not registered!", "#e74c3c");
+        }
+    });
+}
+
+function getElementVal(id) {
+    return document.getElementById(id).value;
+}
+
+function showAlert(message, color) {
+    var alertBox = document.querySelector(".alert");
+    alertBox.innerHTML = message;
+    alertBox.style.backgroundColor = color;
+    alertBox.style.display = "block";
+
+    setTimeout(() => {
+        alertBox.style.display = "none";
+    }, 3000);
+}
+
+
+
+
+</script>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    position: absolute; /* Makes the header position relative to the viewport */
+    top: 0;             /* Places the header at the top */
+    left: 0;
+    right: 0;
+    background-color: white;
+    text-align: center;
+    padding: 1.5rem 0;
+    z-index: 1;         /* Makes sure the header stays on top */
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow to the header */
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 50%; /* This makes it half the width of the viewport */
+    z-index: 0; /* Makes sure the container stays below the header */
+}
+    
+    .alert {
+        background-color: #e74c3c;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        display: none;
+    }
+    
+    .inputBox, .inputBox1, .inputBox2 {
+        margin: 10px 0;
+    }
+    
+    input[type="text"], input[type="text1"], input[type="text2"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+    }
+    .logInSubmitButton {
+    display: flex;          /* Enables Flexbox */
+    justify-content: center; /* Horizontal center alignment */
+    align-items: center;     /* Vertical center alignment */
+    margin-top: 20px;
+    height: 60px;           /* Setting a height to see the vertical centering */
+}
+    
+    .registerSubmitButton {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    button {
+        padding: 10px 15px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    button:hover {
+        background-color: #2980b9;
+    }
+    
+    </style>
+        
+    </body>
+    </html>
+               
+    

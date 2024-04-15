@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Ensure proper rendering and touch zooming on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>METAWIN Casino Coin Flip</title>
+    <style>
+        /* Global styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        /* Styling for the main game container */
+        .game-container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Styles for the coin element */
+        #coin {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;       /* Makes the coin circular */
+            background: rgba(237, 210, 6, 0.929);
+            margin: 20px auto;
+            position: relative;
+            transform-style: preserve-3d; /* Allows 3D transformations */
+            transition: transform 2s;     /* 2-second transition for flip effect */
+        }
+
+        /* Rotation effect for when coin is flipped */
+        #coin.flip {
+            transform: rotateY(720deg);
+        }
+
+        /* Styles for the text inside the coin */
+        #coin p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Styling for the game buttons */
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Hover effect for game buttons */
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styling for the game result text */
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main game container -->
+    <div class="game-container" id="game">
+        <h2>Welcome to METAWIN Coin Flip Game</h2>
+        <p>Choose Heads or Tails</p>
+
+        <!-- Coin display element -->
+        <div id="coin">
+            <p id="coinFace">?</p>
+        </div>
+
+        <!-- Game action buttons -->
+        <button onclick="flipCoin('Heads')">Heads</button>
+        <button onclick="flipCoin('Tails')">Tails</button>
+        <!-- Text to display the result of the game -->
+        <p id="result"></p>
+
+        <!-- Other game control buttons -->
+        <button onclick="playAgain()">Play Again</button>
+        <button onclick="goBackHome()">Go Back to Home</button>
+    </div>
+
+    <script>
+        // Accessing DOM elements
+        const coin = document.getElementById('coin');
+        const coinFace = document.getElementById('coinFace');
+        const resultText = document.getElementById('result');
+
+        // Function to simulate the coin flip
+        function flipCoin(guess) {
+            coinFace.innerText = '?';
+            coin.classList.add('flip');  // Adds rotation animation
+            resultText.innerText = 'Flipping...';
+
+            // Logic to randomly determine the outcome after the flip
+            setTimeout(() => {
+                const outcomes = ['Heads', 'Tails'];
+                const outcome = outcomes[Math.floor(Math.random() * 2)];
+                coinFace.innerText = outcome.charAt(0);  // Displays H or T based on the result
+
+                // Display appropriate message based on user's guess and actual outcome
+                if (guess === outcome) {
+                    resultText.innerText = 'Congratulations! You guessed right!';
+                } else {
+                    resultText.innerText = `Sorry, it was ${outcome}. Try again!`;
+                }
+                coin.classList.remove('flip');  // Removes the rotation animation
+            }, 2000);  // Delay for 2 seconds to simulate the flip
+        }
+
+        // Function to reset the game
+        function playAgain() {
+            coinFace.innerText = '?';
+            resultText.innerText = '';
+        }
+
+        // Function to navigate to the home page (this function is defined twice, so only the second definition will be used)
+        function goBackHome() {
+            window.location.href = 'Home.html';
+        }
+    </script>
+</body>
+
+</html>

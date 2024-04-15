@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .product-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0 0 0; /* top right bottom left */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-holder {
+            flex: 1;
+            text-align: center;
+        }
+
+        .image-holder img {
+            max-width: 100%;
+            height: auto;
+            max-height: 300px; /* Set a fixed maximum height */
+            max-width: 300px; /* Set a fixed maximum width */
+        }
+
+        .details-section {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .product-details h3 {
+            font-size: 24px;
+        }
+
+        .product-details p {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .product-details h5 {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #e74c3c;
+        }
+
+        .add-to-cart {
+            background-color: #519d6f;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+    
+.top-bar {
+  text-align: center;
+  padding: 5px 0;
+font-size: 25px;
+background-color:#fff;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <p class="p1">Sponsored: METAWIN: The First Web3 Casino. Instant Payments, Instant Play. No Registration Required. <a href="Game.html">Play NOW</a></p>
+     </div>
+    <!-- Breadcrumb navigation -->
+    <!-- Your existing breadcrumb section -->
+
+    <!-- Main product display section -->
+    <section class="product-wrapper">
+        <!-- Product image section -->
+        <div class="image-holder">
+            <img src="" id="main-image"> <!-- Placeholder for the main product image -->
+        </div>
+
+        <!-- Product details section -->
+        <div class="details-section">
+            <div class="product-details" id="product-details">
+                <!-- Product details will be populated dynamically using JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript code to fetch and populate product details -->
+    <script>
+        // Function to fetch and populate product details
+        function fetchProductDetails(objectId) {
+            // Replace these with your Parse Server API keys and server URL
+            const parseApplicationId = 'pefHdX8TqQ3jDoFGSp7r0eyPgIn1HtteqDcyNSlp';
+            const parseRestApiKey = '5SvaFtNMWRi3gJuK9ZuC7n6Vj8GsWhbvdwY1v6ju';
+            const serverUrl = 'https://parseapi.back4app.com/classes/Product';
+
+            const productUrl = `${serverUrl}/${objectId}`;
+
+            fetch(productUrl, {
+                headers: {
+                    'X-Parse-Application-Id': parseApplicationId,
+                    'X-Parse-REST-API-Key': parseRestApiKey,
+                }
+            })
+            .then(response => response.json())
+            .then(product => {
+                // Ensure that the keys used to access data match your Parse database schema
+                const mainImage = document.getElementById('main-image');
+                mainImage.src = product.imageURL; // Set the main product image
+
+                const productDetails = document.getElementById('product-details');
+                productDetails.innerHTML = `
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <h5>Price: ${product.price} ETH</h5>
+                    <button class="add-to-cart">Add to Cart</button>
+                    <!-- Add more details as needed -->
+                `;
+
+                // Add an event listener to the "Add to Cart" button
+                const addToCartButton = productDetails.querySelector('.add-to-cart');
+                addToCartButton.addEventListener('click', () => {
+                    addToCart(
+                        product.objectId,
+                        product.name,
+                        product.price,
+                        product.imageURL
+                    );
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching product details:', error);
+            });
+        }
+
+        function addToCart(productId, productName, productPrice, productImage) {
+            // Create a new cart item object
+            const cartItem = {
+                id: productId,
+                name: productName,
+                price: productPrice,
+                quantity: 1, // You don't have a quantity input, so set quantity to 1
+                image: productImage // Add the product image URL to the cart item
+            };
+
+            // Retrieve the existing cart from local storage or initialize an empty cart
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Check if the item is already in the cart
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                // If the item already exists in the cart, update the quantity
+                existingItem.quantity += 1; // You don't have a quantity input, so increment by 1
+            } else {
+                // If it's a new item, add it to the cart
+                cart.push(cartItem);
+            }
+
+            // Save the updated cart back to local storage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Provide feedback to the user (optional)
+            alert('Item added to cart.');
+
+            // Optionally, you can redirect the user to the cart page
+            window.location.href = 'cart.html';
+        }
+
+        // Retrieve the product ID from the URL and fetch product details
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        if (productId) {
+            fetchProductDetails(productId);
+        } else {
+            console.error('Product ID is missing.');
+        }
+    </script>
+</body>
+</html>
